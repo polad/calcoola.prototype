@@ -2,3 +2,7 @@ app/cache/*
 app/logs/*
 docs/*
 vendor/
+web/js/dojo/*
+web/js/dijit/*
+web/js/dojox/*
+web/js/util/*
