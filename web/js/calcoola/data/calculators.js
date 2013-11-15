@@ -1,5 +1,18 @@
 define([], function() {
     return [{
+        name: "Pressure Gradient",
+        categories: [ "Basic Formulas" ],
+        args: {
+            a: {
+                label: "Mud Weight",
+                uom: "ppg"
+            }
+        },
+        uom: "psi/ft",
+        formula: function(args) {
+            return args.a * 0.052;
+        }
+    }, {
         name: "Increase Mud Density",
         categories: [ "Drilling Fluids" ],
         args: {
@@ -12,6 +25,7 @@ define([], function() {
                 uom: "ppg"
             }
         },
+        uom: "sk/100 bbl",
         formula: function(args) {
             return (1470 * (args.b - args.a))/(35 - args.b);
         }
