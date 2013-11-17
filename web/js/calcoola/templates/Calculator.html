@@ -1,8 +1,11 @@
 <div class="${baseClass}">
-  <div data-dojo-attach-point="nameNode"
-       class="${baseClass}NameNode"></div>
-  <div data-dojo-attach-point="containerNode"></div>
-  <div data-dojo-attach-point="resultNode"></div>
-  <div class="${baseClass}Uom"
-       data-dojo-attach-point="uomNode"></div>
+  <div data-dojo-type="dijit/TitlePane"
+       data-dojo-props="open:false"
+       data-dojo-attach-point="nameNode"
+       class="${baseClass}NameNode">
+    <div data-dojo-attach-point="containerNode"></div>
+    <div data-dojo-attach-point="resultNode"></div>
+    <div class="${baseClass}Uom"
+         data-dojo-attach-point="uomNode"></div>
+  </div>
 </div>

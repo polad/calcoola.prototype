@@ -1,7 +1,7 @@
 define([], function() {
     return [{
         name: "Pressure Gradient",
-        categories: [ "Basic Formulas" ],
+        categories: [ "Basic Formulas", "Drilling Fluids" ],
         args: {
             a: {
                 label: "Mud Weight",

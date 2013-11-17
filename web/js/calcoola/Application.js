@@ -3,15 +3,11 @@ define([
     "dojo/_base/array",
     "dojo/_base/lang",
     "dijit/_WidgetBase",
-    "dijit/_TemplatedMixin",
-    "dijit/_WidgetsInTemplateMixin",
+    "dijit/_Container",
     "./Category",
-    "./Calculator",
-    "text!./templates/Application.html"
-], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Category, Calculator, WidgetTemplate) {
-    return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
-        
-        templateString: WidgetTemplate,
+    "./Calculator"
+], function(declare, array, lang, _WidgetBase, _Container, Category, Calculator) {
+    return declare([ _WidgetBase, _Container ], {
         
         /* dojo/store/api/Store */
         calculatorStore: null,
@@ -31,16 +27,14 @@ define([
             array.forEach(calculator.categories, lang.hitch(this, function(category) {
                 (this.getCategoryWidget(category) ||
                  this.addCategoryWidget(category)).
-                    addChild(this._buildCalculator({ calculator: calculator} ));
+                    addCalculator(this._buildCalculator({ calculator: calculator} ));
             }));
         },
         
         getCategoryWidget: function(category) {
-            var widgets = array.filter(this.getChildren(), function(widget) {
-                return widget.getCategoryName &&
-                    (widget.getCategoryName() === category);
-            });
-            return (widgets.length > 0) ? widgets[0] : null;
+            return array.filter(this.getChildren(), function(widget) {
+                return widget.get("category") === category;
+            })[0];
         },
         
         addCategoryWidget: function(/* calcoola/entity/Category */ category) {
@@ -51,10 +45,6 @@ define([
         
         _buildCategoryWidget: function(/* calcoola/entity/Category */ category) {
             return new Category({ category: category });
-        },
-        
-        addChild: function(/*dijit/_WidgetBase*/ child, /*Integer?*/ insertIndex) {
-            this.containerNode.addChild.apply(this.containerNode, arguments);
         },
         
         _buildCalculator: function(arguments) {

@@ -4,10 +4,12 @@ define([
     "dojox/lang/functional/object",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
+    "dijit/_WidgetsInTemplateMixin",
     "text!./templates/Calculator.html",
-    "./Argument"
-], function(declare, lang, objFunctions, _WidgetBase, _TemplatedMixin, WidgetTemplate, Argument) {
-    return declare([ _WidgetBase, _TemplatedMixin ], {
+    "./Argument",
+    "dijit/TitlePane"
+], function(declare, lang, objFunctions, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, WidgetTemplate, Argument) {
+    return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
         templateString: WidgetTemplate,
         
         baseClass: "Calculator",
@@ -22,7 +24,7 @@ define([
         
         _setCalculatorAttr: function(calculator) {
             this.calculator = calculator;
-            this.nameNode.innerHTML = calculator.name;
+            this.nameNode.set("title", calculator.name);
             this.uomNode.innerHTML = calculator.uom;
             this._setupArgs(calculator.args);
         },

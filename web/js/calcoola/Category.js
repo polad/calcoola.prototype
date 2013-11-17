@@ -16,7 +16,7 @@ define([
             this.containerNode.set("title", this.category);
         },
         
-        addChild: function(/*dijit/_WidgetBase*/ child, /*Integer?*/ insertIndex) {
+        addCalculator: function(/*calcoola/Calculator*/ calculator, /*Integer?*/ insertIndex) {
             this.containerNode.addChild.apply(this.containerNode, arguments);
         }
     });
