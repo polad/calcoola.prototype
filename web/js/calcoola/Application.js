@@ -3,23 +3,30 @@ define([
     "dojo/_base/array",
     "dojo/_base/lang",
     "dijit/_WidgetBase",
+    "dijit/_TemplatedMixin",
+    "dijit/_WidgetsInTemplateMixin",
     "dijit/_Container",
     "./Category",
-    "./Calculator"
-], function(declare, array, lang, _WidgetBase, _Container, Category, Calculator) {
-    return declare([ _WidgetBase, _Container ], {
+    "./Calculator",
+    "text!./templates/Application.html",
+    "dijit/form/TextBox"
+], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Category, Calculator, WidgetTemplate) {
+    return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container ], {
+        templateString: WidgetTemplate,
+        baseClass: "CalcoolaApplication",
         
         /* dojo/store/api/Store */
         calculatorStore: null,
         
         postCreate: function() {
             this.inherited(arguments);
-            this.renderCalculators(this.calculatorStore);
+            this.renderCalculators();
         },
         
-        renderCalculators: function(/* dojo/store/api/Store */ calculatorStore) {
-            if (calculatorStore) {
-                calculatorStore.query().forEach(lang.hitch(this, "addCalculator"));
+        renderCalculators: function(/* String|Object|Function */ query) {
+            this._clearCalculators();
+            if (this.calculatorStore) {
+                this.calculatorStore.query(query).forEach(lang.hitch(this, "addCalculator"));
             }
         },
         
@@ -39,6 +46,7 @@ define([
         
         addCategoryWidget: function(/* calcoola/entity/Category */ category) {
             widget = this._buildCategoryWidget(category);
+            this.on("clearCalculators", lang.hitch(widget, "destroy"));
             this.addChild(widget);
             return widget;
         },
@@ -49,6 +57,23 @@ define([
         
         _buildCalculator: function(arguments) {
             return new Calculator(arguments);
-        }
+        },
+        
+        _searchCalculators: function(name) {
+            this.renderCalculators(lang.hitch(this, function(calculator) {
+                return this._queryByName(calculator, name);
+            }));
+        },
+        
+        _queryByName: function(calculator, searchedName) {
+            return (calculator.name || "").toLowerCase().
+                 indexOf((searchedName || "").toLowerCase()) !== -1;
+        },
+        
+        _clearCalculators: function() {
+            this.onClearCalculators();
+        },
+        
+        onClearCalculators: function() {}
     });
 });
