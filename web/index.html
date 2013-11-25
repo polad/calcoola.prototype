@@ -1,13 +1,17 @@
 <html>
   <head>
     <title>Calcoola</title>
-    <link type="text/css" rel="stylesheet" href="/js/dijit/themes/claro/claro.css">
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css">
     <link type="text/css" rel="stylesheet" href="/js/calcoola/css/main.css">
     <link type="text/css" rel="stylesheet" href="/js/calcoola/css/requires.css">
     <script>
       dojoConfig = {
           async: true,
           deps: [ "calcoola/main" ],
+          packages: [{
+              name: "calcoola",
+              location: "/js/calcoola"
+          }],
           map: {
               "*": {
                   text: "dojo/text"
@@ -15,7 +19,7 @@
           }
       };
     </script>
-    <script src="/js/dojo/dojo.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js"></script>
   </head>
   <body class="claro calcoola">
   </body>
