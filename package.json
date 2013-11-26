@@ -1,0 +1,11 @@
+{
+    "name": "calcoola",
+    "description": "calculator web application",
+    "url": "http://calcoola.com",
+    "author": "Polad Mirzayev",
+    "main": "app.js",
+    "dependencies": {
+        "connect": ">=2.11.0"
+    },
+    "version": "0.0.1"
+}
