@@ -66,8 +66,10 @@ define([
         },
         
         _queryByName: function(calculator, searchedName) {
-            return (calculator.name || "").toLowerCase().
-                 indexOf((searchedName || "").toLowerCase()) !== -1;
+            return searchedName && array.every(searchedName.split(" "), function(word) {
+                return (calculator.name || "").toLowerCase().
+                    indexOf((word || "").toLowerCase()) !== -1;
+            });
         },
         
         _clearCalculators: function() {
