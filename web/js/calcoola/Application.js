@@ -60,9 +60,13 @@ define([
         },
         
         _searchCalculators: function(name) {
-            this.renderCalculators(lang.hitch(this, function(calculator) {
-                return this._queryByName(calculator, name);
-            }));
+            var query = null;
+            if (name) {
+                query = lang.hitch(this, function(calculator) {
+                    return this._queryByName(calculator, name);
+                });
+            }
+            this.renderCalculators(query);
         },
         
         _queryByName: function(calculator, searchedName) {
