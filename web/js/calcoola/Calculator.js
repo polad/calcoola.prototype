@@ -52,6 +52,9 @@ define([
         },
         
         _updateResultNode: function(result) {
+            if (result === undefined || result === null || isNaN(result)) {
+                result = "";
+            }
             this.resultNode.innerHTML = result;
         },
         

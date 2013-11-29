@@ -5,7 +5,8 @@ define([], function() {
         args: {
             a: {
                 label: "Mud Weight",
-                uom: "ppg"
+                uom: "ppg",
+                defaultValue: 0.0
             }
         },
         uom: "psi/ft",
@@ -18,7 +19,8 @@ define([], function() {
         args: {
             a: {
                 label: "Mud Weight",
-                uom: "lb/ft3"
+                uom: "lb/ft3",
+                defaultValue: 0.0
             }
         },
         uom: "psi/ft",
@@ -31,11 +33,13 @@ define([], function() {
         args: {
             a: {
                 label: "Starting Density",
-                uom: "ppg"
+                uom: "ppg",
+                defaultValue: 0.0
             },
             b: {
                 label: "Desirable Density",
-                uom: "ppg"
+                uom: "ppg",
+                defaultValue: 0.0
             }
         },
         uom: "sk/100 bbl",

@@ -1,10 +1,15 @@
 <div>
-  <label class="${baseClass}Label"
-         data-dojo-attach-point="labelNode"></label>
-  <input class="${baseClass}Input"
-         data-dojo-type="dijit/form/NumberTextBox"
-         data-dojo-attach-point="input"
-         data-dojo-attach-event="onChange:onChange">
-  <div class="${baseClass}Uom"
-       data-dojo-attach-point="uomNode"></div>
+  <div class="${baseClass}LabelContainer">
+    <label class="${baseClass}Label"
+           data-dojo-attach-point="labelNode"></label>
+  </div>
+  <div class="${baseClass}InputContainer">
+    <input class="${baseClass}Input"
+           data-dojo-type="dijit/form/NumberTextBox"
+           data-dojo-attach-point="input"
+           data-dojo-attach-event="onChange:onChange"
+           data-dojo-props="required:true">
+    <div class="${baseClass}Uom"
+         data-dojo-attach-point="uomNode"></div>
+  </div>
 </div>

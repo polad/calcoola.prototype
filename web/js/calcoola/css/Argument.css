@@ -1,0 +1,21 @@
+.Argument {
+    padding: 3px 0px;
+}
+
+.ArgumentLabelContainer {
+    width: 180px;
+    text-align: right;
+    display: inline-block;
+}
+
+.ArgumentInputContainer {
+    display: inline-block;
+}
+
+.ArgumentInput {
+    width: 100px;
+}
+
+.ArgumentUom {
+    display: inline-block;
+}

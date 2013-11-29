@@ -1,0 +1,20 @@
+.CalculatorResultContainer {
+    padding: 3px 0px;
+}
+
+.CalculatorResultLabel {
+    width: 180px;
+    text-align: right;
+    display: inline-block;
+}
+
+.CalculatorResult {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.CalculatorResultUom {
+    display: inline-block;
+    font-weight: bold;
+}

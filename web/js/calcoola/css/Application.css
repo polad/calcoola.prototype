@@ -1,0 +1,14 @@
+.CalcoolaApplication {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.CalcoolaApplicationHeader {
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.CalcoolaApplicationSearchBox {
+    font-size: 14pt;
+    width: 798px;
+}
