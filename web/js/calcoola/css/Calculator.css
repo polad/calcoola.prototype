@@ -18,3 +18,27 @@
     display: inline-block;
     font-weight: bold;
 }
+
+.CalculatorContainerNode {
+    position: relative;
+}
+
+.CalculatorBody {
+}
+
+.CalculatorDescription {
+    border: 1px dashed #C0C0C0;
+    font-size: 8pt;
+    font-style: italic;
+    background-color: #F5F5F5;
+    padding: 7px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 300px;
+}
+
+.CalculatorDescription.hidden {
+    display: none;
+}

@@ -3,13 +3,19 @@
        data-dojo-props="open:false"
        data-dojo-attach-point="nameNode"
        class="${baseClass}NameNode">
-    <div data-dojo-attach-point="containerNode"></div>
-    <div class="${baseClass}ResultContainer">
-      <div class="${baseClass}ResultLabel">Result:</div>
-      <div data-dojo-attach-point="resultNode"
-           class="${baseClass}Result"></div>
-      <div class="${baseClass}ResultUom"
-           data-dojo-attach-point="uomNode"></div>
-    <div>
+    <div class="${baseClass}ContainerNode">
+      <div class="${baseClass}Body">
+        <div data-dojo-attach-point="argumentContainer"></div>
+        <div class="${baseClass}ResultContainer">
+          <div class="${baseClass}ResultLabel">Result:</div>
+          <div data-dojo-attach-point="resultNode"
+               class="${baseClass}Result"></div>
+          <div class="${baseClass}ResultUom"
+               data-dojo-attach-point="uomNode"></div>
+        </div>
+      </div>
+      <div data-dojo-attach-point="descriptionNode"
+           class="${baseClass}Description"></div>
+    </div>
   </div>
 </div>
