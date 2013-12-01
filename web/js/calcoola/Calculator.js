@@ -2,6 +2,7 @@ define([
     "dojo/_base/declare",
     "dojo/_base/lang",
     "dojo/dom-class",
+    "dojo/number",
     "dojox/lang/functional/object",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
@@ -9,7 +10,7 @@ define([
     "text!./templates/Calculator.html",
     "./Argument",
     "dijit/TitlePane"
-], function(declare, lang, domClass, objFunctions, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, WidgetTemplate, Argument) {
+], function(declare, lang, domClass, number, objFunctions, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, WidgetTemplate, Argument) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
         templateString: WidgetTemplate,
         
@@ -48,7 +49,10 @@ define([
         },
         
         calculate: function(args) {
-            var result = (this.calculator && lang.isFunction(this.calculator.formula)) ? this.calculator.formula(args) : null;
+            var result = null;
+            if (this.calculator && lang.isFunction(this.calculator.formula)) {
+                result = number.round(this.calculator.formula(args), this.calculator.decimals || 2);
+            }
             this.onCalculate(result);
         },
         
