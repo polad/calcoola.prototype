@@ -57,7 +57,7 @@ define([
         },
         
         _updateResultNode: function(result) {
-            if (result === undefined || result === null || isNaN(result)) {
+            if (result === undefined || result === null || result === Infinity || isNaN(result)) {
                 result = "";
             }
             this.resultNode.innerHTML = result;
