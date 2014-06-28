@@ -1,11 +1,13 @@
 <div>
   <div class="${baseClass}Header">
-    <input data-dojo-type="dijit/form/TextBox"
+    <input data-dojo-type="calcoola/SearchBox"
            data-dojo-attach-point="searchBox"
            data-dojo-props="intermediateChanges:true, placeHolder:'Enter calculator name here...'"
-           data-dojo-attach-event="onChange:_searchCalculators"
+           data-dojo-attach-event="onSearch:_searchCalculators"
            class="${baseClass}SearchBox">
   </div>
+  <div data-dojo-type="calcoola/Category"
+       data-dojo-props="category: 'Categories', open:0"></div>
   <div data-dojo-attach-point="containerNode">
   </div>
 </div>

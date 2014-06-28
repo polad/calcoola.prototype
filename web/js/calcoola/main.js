@@ -1,10 +1,10 @@
 require([
     "dojo/query",
-    "dojo/store/Memory",
+    "dojo/store/JsonRest",
     "calcoola/Application",
     "calcoola/data/calculators"
-], function(query, Memory, Application, calculators) {
-    var calculatorStore = new Memory({ data: calculators });
+], function(query, JsonRest, Application, calculators) {
+    var calculatorStore = new JsonRest({ target: "/api/calculators" });
     new Application({ calculatorStore: calculatorStore }).
         placeAt(query("body")[0]).
         startup();

@@ -9,7 +9,7 @@ define([
     "./Category",
     "./Calculator",
     "text!./templates/Application.html",
-    "dijit/form/TextBox"
+    "calcoola/SearchBox"
 ], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Category, Calculator, WidgetTemplate) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container ], {
         templateString: WidgetTemplate,
@@ -20,14 +20,15 @@ define([
         
         postCreate: function() {
             this.inherited(arguments);
-            this.renderCalculators();
+            this.searchBox.set({
+                store: this.calculatorStore,
+                queryExpr: "${0}"
+            });
         },
         
-        renderCalculators: function(/* String|Object|Function */ query) {
+        renderCalculators: function(calculators) {
             this._clearCalculators();
-            if (this.calculatorStore) {
-                this.calculatorStore.query(query).forEach(lang.hitch(this, "addCalculator"));
-            }
+            array.forEach(calculators, lang.hitch(this, "addCalculator"));
         },
         
         addCalculator: function(/* calcoola/entity/Calculator */ calculator) {
@@ -59,21 +60,8 @@ define([
             return new Calculator(arguments);
         },
         
-        _searchCalculators: function(name) {
-            var query = null;
-            if (name) {
-                query = lang.hitch(this, function(calculator) {
-                    return this._queryByName(calculator, name);
-                });
-            }
-            this.renderCalculators(query);
-        },
-        
-        _queryByName: function(calculator, searchedName) {
-            return searchedName && array.every(searchedName.split(" "), function(word) {
-                return (calculator.name || "").toLowerCase().
-                    indexOf((word || "").toLowerCase()) !== -1;
-            });
+        _searchCalculators: function(results, query, options) {
+            this.renderCalculators(results);
         },
         
         _clearCalculators: function() {
