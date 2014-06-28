@@ -50,8 +50,11 @@ define([
         
         calculate: function(args) {
             var result = null;
-            if (this.calculator && lang.isFunction(this.calculator.formula)) {
-                result = number.round(this.calculator.formula(args), this.calculator.decimals || 2);
+            if (this.calculator && this.calculator.formula) {
+                var formula = eval("(function(args){return "+this.calculator.formula+";})");
+                if (lang.isFunction(formula)) {
+                    result = number.round(formula(args), this.calculator.decimals || 2);
+                }
             }
             this.onCalculate(result);
         },
