@@ -1,6 +1,7 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
+    "dojo/_base/array",
     "dojo/dom-class",
     "dojo/number",
     "dojox/lang/functional/object",
@@ -8,9 +9,10 @@ define([
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
     "text!./templates/Calculator.html",
+    "./Tag",
     "./Argument",
     "dijit/TitlePane"
-], function(declare, lang, domClass, number, objFunctions, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, WidgetTemplate, Argument) {
+], function(declare, lang, array, domClass, number, objFunctions, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, WidgetTemplate, Tag, Argument) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin ], {
         templateString: WidgetTemplate,
         
@@ -26,9 +28,18 @@ define([
         _setCalculatorAttr: function(calculator) {
             calculator.name && (this.nameNode.set("title", calculator.name));
             calculator.uom && (this.uomNode.innerHTML = calculator.uom);
+            this._setCategories(calculator.categories);
             this._setDescription(calculator.description);
             this._setupArgs(calculator.args);
             this._set("calculator", calculator);
+        },
+        
+        _setCategories: function(categories) {
+            array.forEach(categories || [], lang.hitch(this, function(category) {
+                var categoryWidget = this._buildTag({ value: category });
+                this.on("destroy", lang.hitch(categoryWidget, "destroy"));
+                categoryWidget.placeAt(this.categoryContainer);
+            }));
         },
         
         _setupArgs: function(args) {
@@ -69,6 +80,10 @@ define([
         _setDescription: function(description) {
             description && (this.descriptionNode.innerHTML = description);
             domClass.toggle(this.descriptionNode, "hidden", !description);
+        },
+        
+        _buildTag: function(attributes) {
+            return new Tag(attributes);
         },
         
         onCalculate: function(result) {}

@@ -6,17 +6,22 @@ define([
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
     "dijit/_Container",
-    "./Category",
+    "dojo/store/Memory",
     "./Calculator",
+    "./FilterField",
     "text!./templates/Application.html",
     "calcoola/SearchBox"
-], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Category, Calculator, WidgetTemplate) {
+], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Memory, Calculator, FilterField, WidgetTemplate) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container ], {
         templateString: WidgetTemplate,
+        
         baseClass: "CalcoolaApplication",
         
         /* dojo/store/api/Store */
         calculatorStore: null,
+        
+        /* dojo/store/api/Store */
+        categoryStore: null,
         
         postCreate: function() {
             this.inherited(arguments);
@@ -28,36 +33,25 @@ define([
         
         renderCalculators: function(calculators) {
             this._clearCalculators();
-            array.forEach(calculators, lang.hitch(this, "addCalculator"));
-        },
-        
-        addCalculator: function(/* calcoola/entity/Calculator */ calculator) {
-            array.forEach(calculator.categories, lang.hitch(this, function(category) {
-                (this.getCategoryWidget(category) ||
-                 this.addCategoryWidget(category)).
-                    addCalculator(this._buildCalculator({ calculator: calculator} ));
+            this._setupCategoryStore();
+            array.forEach(calculators, lang.hitch(this, function(calculator, index) {
+                this.addCalculator(calculator);
+                if (index >= calculators.length-1) {
+                    this._setupCategoryFilter();
+                }
             }));
         },
         
-        getCategoryWidget: function(category) {
-            return array.filter(this.getChildren(), function(widget) {
-                return widget.get("category") === category;
-            })[0];
+        addCalculator: function(/* calcoola/entity/Calculator */ calculator) {
+            this._registerCategories(calculator.categories);
+            var calculatorWidget = this._buildCalculator({ calculator: calculator });
+            this.on("clearCalculators", lang.hitch(calculatorWidget, "destroy"));
+            this.addChild(calculatorWidget);
+            return calculatorWidget;
         },
         
-        addCategoryWidget: function(/* calcoola/entity/Category */ category) {
-            widget = this._buildCategoryWidget(category);
-            this.on("clearCalculators", lang.hitch(widget, "destroy"));
-            this.addChild(widget);
-            return widget;
-        },
-        
-        _buildCategoryWidget: function(/* calcoola/entity/Category */ category) {
-            return new Category({ category: category });
-        },
-        
-        _buildCalculator: function(arguments) {
-            return new Calculator(arguments);
+        _buildCalculator: function(attributes) {
+            return new Calculator(attributes);
         },
         
         _searchCalculators: function(results, query, options) {
@@ -66,8 +60,49 @@ define([
         
         _clearCalculators: function() {
             this.onClearCalculators();
+            this.onClearFilters();
         },
         
-        onClearCalculators: function() {}
+        _registerCategories: function(categories) {
+            var store = this.categoryStore;
+            array.forEach(categories, lang.hitch(this, function(category) {
+                if (!store.get(category)) {
+                    store.add(this._buildCategoryObject(category));
+                }
+            }));
+        },
+            
+        _buildCategoryObject: function(category) {
+            return { id: category, name: category };
+        },
+        
+        _setupCategoryFilter: function() {
+            if (!this.categoryStore) {
+                this._setupCategoryStore();
+            }
+            var categoryFilter = this._buildCategoryFilter({
+                name: "Found in categories:",
+                store: this.categoryStore,
+                sort: [ { attribute: "name" } ]
+            });
+            this.on("clearFilters", lang.hitch(categoryFilter, "destroy"));
+            categoryFilter.placeAt(this.filterContainer);
+        },
+        
+        _buildCategoryFilter: function(attributes) {
+            return new FilterField(attributes);
+        },
+        
+        _setupCategoryStore: function() {
+            this.categoryStore = this._buildCategoryStore();
+        },
+        
+        _buildCategoryStore: function(attributes) {
+            return new Memory(attributes);
+        },
+        
+        /** Custom Events **/
+        onClearCalculators: function() {},
+        onClearFilters: function() {}
     });
 });

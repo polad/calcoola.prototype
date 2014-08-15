@@ -42,3 +42,7 @@
 .CalculatorDescription.hidden {
     display: none;
 }
+
+.CalculatorCategoryContainer {
+    padding: 3px 0px;
+}

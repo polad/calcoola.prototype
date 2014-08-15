@@ -1,0 +1,11 @@
+.FilterField {
+    padding: 5px;
+}
+
+.FilterFieldNameNode {
+    display: inline-block;
+}
+
+.FilterFieldContainerNode {
+    display: inline-block;
+}

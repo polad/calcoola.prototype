@@ -5,9 +5,12 @@
        class="${baseClass}NameNode">
     <div class="${baseClass}ContainerNode">
       <div class="${baseClass}Body">
+        <div data-dojo-attach-point="categoryContainer"
+             class="${baseClass}CategoryContainer"></div>
         <div data-dojo-attach-point="argumentContainer"></div>
         <div class="${baseClass}ResultContainer">
-          <div class="${baseClass}ResultLabel">Result:</div>
+          <div class="${baseClass}ResultLabel"
+               data-dojo-attach-point="resultLabelNode">Result:</div>
           <div data-dojo-attach-point="resultNode"
                class="${baseClass}Result"></div>
           <div class="${baseClass}ResultUom"
