@@ -5,10 +5,72 @@
 
 .CalcoolaApplicationHeader {
     text-align: center;
-    padding: 5px 0px;
+    padding: 10px 0px;
+}
+
+.CalcoolaApplicationSearchBoxContainer {
+    width: 650px;
+    height: 60px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+.CalcoolaApplication.init .CalcoolaApplicationSearchBoxContainer {
+    position: absolute;
+}
+
+.CalcoolaApplicationSearchBoxBorder {
+    width: 650px;
+    height: 46px;
+    padding: 9px;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: inset 0px 0px 9px 0px rgba(255,255,255,0.1);
+    -moz-box-shadow: inset 0px 0px 9px 0px rgba(255,255,255,0.1);
+    box-shadow: inset 0px 0px 9px 0px rgba(255,255,255,0.1);
 }
 
 .CalcoolaApplicationSearchBox {
-    font-size: 14pt;
-    width: 798px;
+    font-size: 22px;
+    width: 590px;
+    height: 26px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    padding: 10px 50px 10px 10px;
+    border: 0px;
+}
+
+.CalcoolaApplication.init > .CalcoolaApplicationSearchExample {
+    display: block;
+    font-size: 13px;
+    color: white;
+    opacity: 0.3;
+    padding-top: 10px;
+}
+.CalcoolaApplicationSearchExample {
+    display: none;
+}
+
+.CalcoolaApplicationFilterContainer {
+    opacity: 0;
+}
+
+.CalcoolaApplicationContainerNode {
+    opacity: 0;
+}
+
+.CalcoolaApplicationFooter {
+    color: rgba(255,255,255, 0.5);
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    padding: 5px;
+    font-size: 11px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    outline: 1px solid rgba(0,0,0,0.3);
 }

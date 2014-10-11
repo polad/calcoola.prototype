@@ -2,6 +2,11 @@ define([
     "dojo/_base/declare",
     "dojo/_base/array",
     "dojo/_base/lang",
+    "dojo/_base/fx",
+    "dojo/fx",
+    "dojo/fx/easing",
+    "dojo/dom-style",
+    "dojo/dom-class",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
@@ -11,7 +16,7 @@ define([
     "./FilterField",
     "text!./templates/Application.html",
     "calcoola/SearchBox"
-], function(declare, array, lang, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Memory, Calculator, FilterField, WidgetTemplate) {
+], function(declare, array, lang, baseFx, fx, fxEasing, domStyle, domClass, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Memory, Calculator, FilterField, WidgetTemplate) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container ], {
         templateString: WidgetTemplate,
         
@@ -28,6 +33,38 @@ define([
             this.searchBox.set({
                 store: this.calculatorStore,
                 queryExpr: "${0}"
+            });
+            var searchBoxContainer = this.searchBoxContainer;
+            var containerNode = this.containerNode;
+            var filterContainer = this.filterContainer;
+            var appNode = this.domNode;
+            var onSearchHandle = this.on("search", function(results) {
+                fx.chain([
+                    fx.slideTo({
+                        node: searchBoxContainer,
+                        duration: 1500,
+                        easing: fxEasing.quintInOut,
+                        top: 10,
+                        beforeBegin: function() {
+                            domStyle.set(searchBoxContainer, {
+                                margin: "0px auto",
+                                top: searchBoxContainer.offsetTop
+                            });
+                        },
+                        onEnd: function() {
+                            domClass.remove(appNode, "init");
+                        }
+                    }),
+                    fx.combine([
+                        baseFx.fadeIn({
+                            node: containerNode
+                        }),
+                        baseFx.fadeIn({
+                            node: filterContainer
+                        })
+                    ])
+                ]).play();
+                onSearchHandle.remove();
             });
         },
         
@@ -55,6 +92,7 @@ define([
         },
         
         _searchCalculators: function(results, query, options) {
+            this.onSearch(results);
             this.renderCalculators(results);
         },
         
@@ -102,6 +140,7 @@ define([
         },
         
         /** Custom Events **/
+        onSearch: function(results) {},
         onClearCalculators: function() {},
         onClearFilters: function() {}
     });

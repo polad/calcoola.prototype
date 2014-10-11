@@ -1,12 +1,36 @@
-<div>
+<div class="init">
+  <div class="symbol prop1">&prop;</div>
+  <div class="symbol prop2">&prop;</div>
+  <div class="symbol phi1">&phi;</div>
+  <div class="symbol phi2">&phi;</div>
+  <div class="symbol delta1">&Delta;</div>
+  <div class="symbol pi1">&pi;</div>
+  <div class="symbol pi2">&Pi;</div>
+  <div class="symbol func2">&fnof;(x)</div>
+  <div class="symbol gamma1">&gamma;</div>
+  <div class="symbol gamma2">&gamma;</div>
+  <div class="symbol sigma1">&Sigma;</div>
+  <div class="symbol percent1">%</div>
+  <div class="symbol infin1">&infin;</div>
   <div class="${baseClass}Header">
-    <input data-dojo-type="calcoola/SearchBox"
-           data-dojo-attach-point="searchBox"
-           data-dojo-props="intermediateChanges:true, placeHolder:'Enter calculator name here...'"
-           data-dojo-attach-event="onSearch:_searchCalculators"
-           class="${baseClass}SearchBox">
+    <div class="${baseClass}SearchBoxContainer"
+         data-dojo-attach-point="searchBoxContainer">
+      <div class="${baseClass}SearchBoxBorder">
+        <input data-dojo-type="calcoola/SearchBox"
+               data-dojo-attach-point="searchBox"
+               data-dojo-props="intermediateChanges:true, placeHolder:'Search for calculator or formula...'"
+               data-dojo-attach-event="onSearch:_searchCalculators"
+               class="${baseClass}SearchBox">
+      </div>
+      <div class="${baseClass}SearchExample">e.g. Pressure gradient using mud weight ppg</div>
+    </div>
   </div>
-  <div data-dojo-attach-point="filterContainer"></div>
-  <div data-dojo-attach-point="containerNode">
+  <div class="${baseClass}FilterContainer"
+       data-dojo-attach-point="filterContainer"></div>
+  <div class="${baseClass}ContainerNode"
+       data-dojo-attach-point="containerNode">
+  </div>
+  <div class="${baseClass}Footer">
+    <div class="Copyright">Copyright © 2014 calcoola.com</div>
   </div>
 </div>

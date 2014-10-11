@@ -1,3 +1,21 @@
+.Calculator {
+    margin-bottom: 1px;
+    border: 1px solid rgba(255,255,255,0.45);
+    font-size: 14px;
+    color: white;
+    position: relative;
+}
+
+.CalculatorHeaderUnderline {
+    position: absolute;
+    height: 1px;
+    top: 37px;
+    right: 20px;
+    left: 20px;
+    margin: 0px auto;
+    background-color: rgba(255,255,255, 0.4);
+}
+
 .CalculatorResultContainer {
     padding: 3px 0px;
 }
@@ -19,24 +37,24 @@
     font-weight: bold;
 }
 
-.CalculatorContainerNode {
-    position: relative;
-}
-
 .CalculatorBody {
+    position: relative;
+    padding: 5px 10px;
 }
 
 .CalculatorDescription {
-    border: 1px dashed #C0C0C0;
-    font-size: 8pt;
+    border: 1px solid rgba(255,255,255, 0.4);
     font-style: italic;
-    background-color: #F5F5F5;
+    background-color: rgba(58,89,133, 0.7);
     padding: 7px;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 5px;
+    right: 10px;
     bottom: 0px;
     width: 300px;
+    height: 50px;
+    overflow: hidden;
+    margin: auto;
 }
 
 .CalculatorDescription.hidden {
@@ -45,4 +63,39 @@
 
 .CalculatorCategoryContainer {
     padding: 3px 0px;
+}
+
+.Calculator > .CalculatorNameNode > .dijitTitlePaneTitle {
+    background-color: rgba(255,255,255,0.23);
+    background-image: none;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+}
+
+.Calculator > .CalculatorNameNode > .dijitTitlePaneTitleOpen {
+    background-color: rgba(255,255,255, 0.13);
+}
+
+.Calculator > .CalculatorNameNode > .dijitTitlePaneContentOuter {
+    background: rgba(255,255,255, 0.13);
+    border: none;
+}
+
+.Calculator > .CalculatorNameNode > .dijitTitlePaneTitle .dijitArrowNode {
+    background-image: none;
+}
+.Calculator > .CalculatorNameNode > .dijitTitlePaneTitleClosed .dijitArrowNode {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid white;
+}
+.Calculator > .CalculatorNameNode > .dijitTitlePaneTitleOpen .dijitArrowNode {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid white;
 }
