@@ -5,6 +5,7 @@ define([
     "dojo/_base/fx",
     "dojo/fx",
     "dojo/fx/easing",
+    "dojo/fx/Toggler",
     "dojo/dom-style",
     "dojo/dom-class",
     "dijit/_WidgetBase",
@@ -16,7 +17,7 @@ define([
     "./FilterField",
     "text!./templates/Application.html",
     "calcoola/SearchBox"
-], function(declare, array, lang, baseFx, fx, fxEasing, domStyle, domClass, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Memory, Calculator, FilterField, WidgetTemplate) {
+], function(declare, array, lang, baseFx, fx, fxEasing, Toggler, domStyle, domClass, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container, Memory, Calculator, FilterField, WidgetTemplate) {
     return declare([ _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container ], {
         templateString: WidgetTemplate,
         
@@ -28,12 +29,15 @@ define([
         /* dojo/store/api/Store */
         categoryStore: null,
         
+        _notFoundToggler: null,
+        
         postCreate: function() {
             this.inherited(arguments);
             this.searchBox.set({
                 store: this.calculatorStore,
                 queryExpr: "${0}"
             });
+            this._notFoundToggler = new Toggler({ node: this.notFoundNode });
             var searchBoxContainer = this.searchBoxContainer;
             var containerNode = this.containerNode;
             var filterContainer = this.filterContainer;
@@ -42,7 +46,8 @@ define([
                 fx.chain([
                     fx.slideTo({
                         node: searchBoxContainer,
-                        duration: 1500,
+                        duration: 1000,
+                        rate: 10,
                         easing: fxEasing.quintInOut,
                         top: 10,
                         beforeBegin: function() {
@@ -71,12 +76,17 @@ define([
         renderCalculators: function(calculators) {
             this._clearCalculators();
             this._setupCategoryStore();
-            array.forEach(calculators, lang.hitch(this, function(calculator, index) {
-                this.addCalculator(calculator);
-                if (index >= calculators.length-1) {
-                    this._setupCategoryFilter();
-                }
-            }));
+            if (calculators.length) {
+                this._notFoundToggler.hide();
+                array.forEach(calculators, lang.hitch(this, function(calculator, index) {
+                    this.addCalculator(calculator);
+                    if (index >= calculators.length-1) {
+                        this._setupCategoryFilter();
+                    }
+                }));
+            } else {
+                this._notFoundToggler.show();
+            }
         },
         
         addCalculator: function(/* calcoola/entity/Calculator */ calculator) {

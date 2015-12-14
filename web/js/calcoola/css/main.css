@@ -23,6 +23,28 @@ body.calcoola {
     background:-ms-linear-gradient(30deg, rgb(75,38,117) 3%, rgb(44, 122, 171) 85%), -ms-radial-gradient(900px at 50% -250px, rgba(148, 211, 252, 0.3) 30%, rgba(44, 122, 171, 0) 70%);
 }
 
+.bg {
+    background: url("/images/bg_symbols.png");
+    background-repeat: repeat;
+    background-size: 150px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: -1;
+    opacity: 0.05;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.bg.bg2 {
+    background-position: 79px 14px;
+}
+.bg.bg3 {
+    background-position: 174px 28px;
+}
+
 .hw {
     background: #fff;
     margin: 0 auto;
