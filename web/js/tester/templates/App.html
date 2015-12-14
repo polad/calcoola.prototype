@@ -1,0 +1,22 @@
+<div>
+  <div data-dojo-type="dijit/layout/LayoutContainer"
+       class="${baseClass}LayoutContainer">
+    <div data-dojo-type="dijit/layout/ContentPane"
+         data-dojo-props="region: 'center' "
+         class="${baseClass}Container">
+      <textarea data-dojo-attach-point="calculators"
+                class="calculators"></textarea>
+    </div>
+    <div data-dojo-type="dijit/layout/ContentPane"
+         data-dojo-props="region: 'right'"
+         class="${baseClass}SidePane">
+      <div class="${baseClass}Toolbar">
+        <button data-dojo-type="dijit/form/Button"
+           data-dojo-attach-event="onClick:_onTestButtonClick">Test</button>
+      </div>
+      <div data-dojo-attach-point="testResultsContainer"
+           class="${baseClass}TestResultsContainer">
+      </div>
+    </div>
+  </div>
+</div>

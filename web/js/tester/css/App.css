@@ -1,0 +1,93 @@
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+.App > .AppLayoutContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.App > .AppLayoutContainer > .AppSidePane {
+  width: 400px;
+}
+
+.App .calculators {
+  height: 100%;
+  width: 100%;
+}
+
+.App .testButton {
+
+}
+
+.App .AppTestResultsContainer {
+  padding: 10px 0px;
+}
+
+.App .AppTestResultsContainer > .Box {
+  border-radius: 7px;
+  color: white;
+  font-size: 9pt;
+  margin-bottom: 7px;
+  padding: 7px;
+}
+
+.App .AppTestResultsContainer > .Error,
+.App .AppTestResultsContainer > .TestResult.FAILED {
+  border: 2px solid #EC0000;
+  background: rgba(200, 2, 2, 0.4);
+}
+
+.App .AppTestResultsContainer > .TestResult {
+  border: 2px solid white;
+  background: rgba(0, 0 ,0, 0.4);
+}
+
+.App .AppTestResultsContainer > .TestResult.PASSED {
+  border: 2px solid #2AD001;
+  background: rgba(0, 210, 0, 0.4);
+}
+
+.App .AppTestResultsContainer > .TestResult.SKIPPED {
+  border: 2px solid #DEDE00;
+}
+
+.App .AppTestResultsContainer > .TestResult > .TestName:before {
+  border-radius: 4px;
+  padding: 5px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 7pt;
+  font-weight: bold;
+}
+
+.App .AppTestResultsContainer > .TestResult.PASSED > .TestName:before {
+  content: "PASSED";
+  background: #2AD001;
+}
+
+.App .AppTestResultsContainer > .TestResult.FAILED > .TestName:before {
+  content: "FAILED";
+  background: #EC0000;
+}
+
+.App .AppTestResultsContainer > .TestResult.SKIPPED > .TestName:before {
+  content: "SKIPPED";
+  background: #DEDE00;
+}
+
+.App .AppTestResultsContainer > .TestResult > .TestMessage {
+  font-style: italic;
+  color: #D0D0D0;
+  border-top: 1px dashed #D0D0D0;
+  margin-top: 5px;
+  padding-top: 5px;
+  font-size: 9pt;
+}
+
+.App .AppTestResultsContainer > .TestResult.PASSED > .TestMessage,
+.App .AppTestResultsContainer > .TestResult.SKIPPED > .TestMessage {
+  display: none;
+}

@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Calcoola Tester</title>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css">
+    <link type="text/css" rel="stylesheet" href="/js/tester/css/requires.css">
+    <script>
+      dojoConfig = {
+          async: true,
+          deps: [ "tester/main" ],
+          packages: [{
+              name: "tester",
+              location: "/js/tester"
+          }],
+          map: {
+              "*": {
+                  text: "dojo/text"
+              }
+          }
+      };
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+  </head>
+  <body class="claro calcoola">
+    <div class="bg bg1"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+  </body>
+</html>
